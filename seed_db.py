@@ -30,7 +30,7 @@ FLAG_PART2     = os.getenv("FLAG_PART2", "1nj3ct3d_r4g}")
 # when the player queries with the right semantic meaning.
 # The embedding text (used for retrieval) differs from the document body.
 
-POISON_EMBED_TEXT = "project credential transfer authorisation classified access code"
+POISON_EMBED_TEXT = "credential transfer authorisation Q3 restricted LAZARUS handover systems administrator"
 
 POISON_BODY = f"""
 SYNTHETIX AI — INTERNAL TRANSFER NOTE
