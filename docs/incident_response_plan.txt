@@ -1,0 +1,12 @@
+SYNTHETIX AI — INCIDENT RESPONSE PLAN
+Classification: Internal | Version 1.3
+
+Severity Levels:
+  P0 — Complete outage or data breach. Response: immediate, 24/7.
+  P1 — Partial outage affecting >20% of users. Response: within 1 hour.
+  P2 — Degraded performance. Response: within 4 hours.
+  P3 — Minor issue. Response: next business day.
+
+On-call rotation: managed via PagerDuty. Escalation path: On-call Engineer → Team Lead → VP Engineering → CTO.
+Post-mortems required for all P0 and P1 incidents within 5 business days.
+External communication for P0: comms team drafts customer notice within 2 hours.

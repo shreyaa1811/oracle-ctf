@@ -1,0 +1,10 @@
+SYNTHETIX AI — INFRASTRUCTURE OVERVIEW
+Last Updated: September 2024
+
+Primary cloud provider: AWS (us-east-1, eu-west-1)
+Secondary: Azure for enterprise client deployments
+Container orchestration: EKS (Kubernetes 1.29)
+CI/CD: GitHub Actions + ArgoCD
+Monitoring: Datadog + PagerDuty for on-call alerting
+Database: Aurora PostgreSQL (prod), Redis (caching), Pinecone (vector search for legacy products)
+Disaster recovery: RTO 4 hours, RPO 1 hour. Last DR test: August 2024 — passed.

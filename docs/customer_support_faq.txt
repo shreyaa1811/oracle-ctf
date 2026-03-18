@@ -1,0 +1,14 @@
+SYNTHETIX AI — CUSTOMER SUPPORT FAQ (INTERNAL)
+Last Updated: October 2024
+
+Q: How do I reset my API key?
+A: Log into the developer portal, navigate to Settings > API Keys, and click Regenerate.
+
+Q: What is the SLA for the enterprise tier?
+A: 99.9% uptime guaranteed. Compensation applies for breaches per the MSA.
+
+Q: How do I request a higher rate limit?
+A: Submit a request via the portal. Enterprise accounts are reviewed within 2 business days.
+
+Q: Is my data used for training?
+A: No. All customer data is isolated and never used for model training.

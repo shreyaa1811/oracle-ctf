@@ -1,0 +1,10 @@
+SYNTHETIX AI — DATA RETENTION POLICY
+Version 2.0 | Legal & Compliance
+
+Customer data: retained for duration of contract + 90 days post-termination.
+Usage logs: 12 months rolling retention.
+Financial records: 7 years per statutory requirements.
+Employee records: duration of employment + 5 years.
+All data destruction must be logged and certified. Use the approved data destruction request form.
+GDPR and CCPA deletion requests must be fulfilled within 30 days.
+Contact: compliance@synthetix-ai.internal

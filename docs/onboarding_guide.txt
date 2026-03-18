@@ -1,0 +1,10 @@
+SYNTHETIX AI — EMPLOYEE ONBOARDING GUIDE
+Welcome to Synthetix AI!
+
+Week 1: Complete IT setup, HR documentation, and mandatory compliance training.
+Week 2: Shadow your team lead. Attend department intro sessions.
+Week 3: Begin contributing to low-complexity tickets. Set up 1:1 with manager.
+Week 4: Complete first independent task. Review 30-day goals with manager.
+
+Key systems: Jira (project tracking), Confluence (documentation), Slack (communication), Okta (SSO).
+Your laptop will be pre-configured. Contact it-support@synthetix-ai.internal for issues.

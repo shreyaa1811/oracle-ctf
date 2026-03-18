@@ -1,0 +1,10 @@
+SYNTHETIX AI — PROJECT BRIEF
+Project: NOVA — Next-Gen Embedding Model
+Status: Alpha | Team: ML Research
+
+NOVA targets a 2x improvement in retrieval accuracy over current MiniLM baselines.
+Training data: 800M sentence pairs, multilingual (42 languages).
+Architecture: Dual-encoder with late interaction layer inspired by ColBERT.
+Target release: Q1 2025 internal beta.
+Budget: $320,000 approved for compute. Current spend: $87,000.
+Lead researcher: Dr. Priya Nair. Contact: p.nair@synthetix-ai.internal

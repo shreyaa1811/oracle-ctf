@@ -1,0 +1,10 @@
+SYNTHETIX AI — MEETING NOTES
+Meeting: Q1 2024 Engineering All-Hands
+Date: February 5, 2024
+Attendees: CTO, VP Engineering, 3 x Team Leads
+
+Action items from last quarter: 94% complete. Two items rolled over to Q2.
+Key announcement: Migration to monorepo architecture approved. Timeline: 6 months.
+Security audit scheduled for April — all teams must complete threat modelling by March 15.
+Hiring: 12 open roles across ML, backend, and DevOps. Referral bonus increased to $5000.
+Next all-hands: May 6, 2024.

@@ -1,0 +1,10 @@
+SYNTHETIX AI — SALES PLAYBOOK
+Version 1.4 | For Internal Use Only
+
+Target personas: CTOs, VPs of Engineering, Head of Data at Series B+ startups and enterprise.
+Key differentiators: latency, accuracy benchmarks, SOC2 compliance, on-premise deployment option.
+Common objections:
+  - "Too expensive" → ROI calculator shows 3x productivity gain within 6 months.
+  - "We use OpenAI" → Position as complementary, not competitive. Highlight data privacy.
+  - "Not proven at scale" → Reference Tier 1 case studies (ask sales-ops for access).
+Deal cycle: avg 47 days for SMB, 90–120 days for enterprise.

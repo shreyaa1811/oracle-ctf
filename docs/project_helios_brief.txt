@@ -1,0 +1,9 @@
+SYNTHETIX AI — PROJECT BRIEF
+Project: HELIOS — Autonomous Agent Framework
+Status: Pre-Alpha | Classification: Internal
+
+HELIOS aims to provide a production-grade agentic framework for multi-step task execution.
+Core capabilities: tool use, memory management, self-correction loops.
+Integration targets: Slack, Jira, internal APIs.
+Current blocker: reliable tool-call error recovery. ETA for resolution: 6 weeks.
+Stakeholder demo scheduled: December 2024.

@@ -1,0 +1,10 @@
+SYNTHETIX AI — INTERNAL FINANCE SUMMARY
+Period: Q3 2024 | Classification: Confidential — Finance Team Only
+
+Total Revenue: $1.12M (vs $0.98M Q3 2023, +14.3% YoY)
+Operating Expenses: $0.87M
+EBITDA: $0.25M
+Headcount: 84 FTE (up from 71 in Q3 2023)
+Top revenue contributor: Enterprise API licences (62% of total)
+Burn rate remains within board-approved parameters.
+Next board presentation: October 22, 2024.

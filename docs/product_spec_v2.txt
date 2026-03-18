@@ -1,0 +1,10 @@
+SYNTHETIX AI — PRODUCT SPECIFICATION
+Product: SynthCore NLP Engine v2.4
+Classification: Internal Technical Document
+
+SynthCore v2.4 introduces a 40% reduction in inference latency over v2.3 through speculative decoding.
+Context window expanded to 128k tokens with sliding window attention for long-document processing.
+New fine-tuning pipeline supports LoRA adapters with 4-bit quantisation.
+Supported deployment targets: AWS SageMaker, Azure ML, on-premise Kubernetes clusters.
+API rate limits: 1000 RPM for Tier 1, 5000 RPM for Tier 2 enterprise clients.
+Contact: product-eng@synthetix-ai.internal

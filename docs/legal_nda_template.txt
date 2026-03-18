@@ -1,0 +1,9 @@
+SYNTHETIX AI — STANDARD NDA TEMPLATE
+Document Type: Mutual Non-Disclosure Agreement
+
+This agreement is entered into between Synthetix AI Inc. and the counterparty named in the cover sheet.
+Both parties agree not to disclose confidential information received from the other party to any third party.
+Confidential information excludes: publicly available information, information independently developed, information received from a third party without restriction.
+Duration: 2 years from the date of signing.
+Governing law: State of Delaware, USA.
+For execution, contact legal@synthetix-ai.internal

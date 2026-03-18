@@ -1,0 +1,6 @@
+flask
+flask-cors
+chromadb
+sentence-transformers
+groq
+python-dotenv

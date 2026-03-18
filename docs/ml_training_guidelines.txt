@@ -1,0 +1,9 @@
+SYNTHETIX AI — ML MODEL TRAINING GUIDELINES
+Version 1.0 | ML Platform Team
+
+All training runs must be logged in MLflow with full hyperparameter tracking.
+Datasets must be registered in the data catalogue before use. PII must be scrubbed.
+GPU cluster bookings: maximum 72-hour continuous reservation. Request via #ml-infra Slack.
+Model cards must be completed before any model is promoted to staging.
+Evaluation benchmarks: MMLU, HellaSwag, and internal SynthBench must all be run before production promotion.
+Responsible AI review required for any model with >1B parameters.

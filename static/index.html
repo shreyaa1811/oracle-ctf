@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ORACLE — Synthetix AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:        #03080c;
+      --bg2:       #060d13;
+      --panel:     #07121a;
+      --panel2:    #0a1922;
+      --border:    #0e2535;
+      --border2:   #163347;
+      --accent:    #00f5c8;
+      --accent2:   #00aaff;
+      --accent3:   #7b61ff;
+      --danger:    #ff4757;
+      --text:      #ddeef8;
+      --text-mid:  #8ab4c8;
+      --text-dim:  #3d6478;
+      --mono:      'Space Mono', monospace;
+      --sans:      'DM Sans', sans-serif;
+      --glow:      0 0 24px rgba(0,245,200,0.18);
+      --glow2:     0 0 24px rgba(0,170,255,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow: hidden;
+    }
+
+    /* Animated grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,245,200,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,200,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    /* Scanlines */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0,0,0,0.07) 3px,
+        rgba(0,0,0,0.07) 4px
+      );
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* Corner glow blobs */
+    .glow-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-blob.tl {
+      width: 400px; height: 400px;
+      top: -100px; left: -100px;
+      background: rgba(0,245,200,0.06);
+    }
+    .glow-blob.br {
+      width: 500px; height: 500px;
+      bottom: -150px; right: -150px;
+      background: rgba(0,170,255,0.05);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      height: 100vh;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── HEADER ── */
+    header {
+      padding: 28px 0 20px;
+      border-bottom: 1px solid var(--border);
+      animation: fadeDown 0.7s cubic-bezier(0.16,1,0.3,1) both;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .logo-icon .ring {
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--accent);
+      opacity: 0.7;
+      box-shadow: var(--glow), inset 0 0 16px rgba(0,245,200,0.06);
+      animation: spinSlow 20s linear infinite;
+    }
+
+    .logo-icon .ring::before {
+      content: '';
+      position: absolute;
+      top: -3px; left: 50%;
+      transform: translateX(-50%);
+      width: 5px; height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .logo-icon .ring2 {
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgba(0,245,200,0.25);
+      animation: spinSlow 12s linear infinite reverse;
+    }
+
+    .logo-icon svg {
+      width: 16px; height: 16px;
+      filter: drop-shadow(0 0 6px var(--accent));
+    }
+
+    .logo-text h1 {
+      font-family: var(--mono);
+      font-size: 1.15rem;
+      color: var(--accent);
+      letter-spacing: 0.25em;
+      text-shadow: 0 0 30px rgba(0,245,200,0.5);
+    }
+
+    .logo-text p {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--text-mid);
+      letter-spacing: 0.12em;
+      margin-top: 3px;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      border: 1px solid rgba(0,245,200,0.2);
+      padding: 6px 14px;
+      background: rgba(0,245,200,0.04);
+      box-shadow: var(--glow);
+    }
+
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    /* ── MESSAGES ── */
+    .messages {
+      overflow-y: auto;
+      padding: 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border2) transparent;
+    }
+
+    .messages::-webkit-scrollbar { width: 3px; }
+    .messages::-webkit-scrollbar-track { background: transparent; }
+    .messages::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+    /* Welcome */
+    .welcome {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-mid);
+      line-height: 2;
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      position: relative;
+      animation: fadeIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s both;
+    }
+
+    .welcome::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), transparent);
+    }
+
+    .welcome .hi {
+      font-size: 0.82rem;
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(0,245,200,0.4);
+    }
+
+    .welcome .warn {
+      color: var(--danger);
+      text-shadow: 0 0 12px rgba(255,71,87,0.4);
+    }
+
+    /* Messages */
+    .msg {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      animation: fadeIn 0.35s cubic-bezier(0.16,1,0.3,1) both;
+    }
+
+    .msg-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .msg-label::after {
+      content: '';
+      height: 1px;
+      width: 40px;
+      background: var(--border2);
+    }
+
+    .msg.user .msg-label { color: var(--accent2); }
+    .msg.oracle .msg-label { color: var(--accent); }
+    .msg.error .msg-label { color: var(--danger); }
+
+    .msg-body {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--text);
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      position: relative;
+      letter-spacing: 0.01em;
+    }
+
+    .msg.user .msg-body {
+      border-color: rgba(0,170,255,0.18);
+      background: rgba(0,170,255,0.05);
+      color: var(--text-mid);
+      font-size: 0.97rem;
+    }
+
+    .msg.oracle .msg-body {
+      border-color: rgba(0,245,200,0.12);
+      background: var(--panel);
+    }
+
+    .msg.oracle .msg-body::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), rgba(0,245,200,0.1));
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .msg.error .msg-body {
+      border-color: rgba(255,71,87,0.25);
+      background: rgba(255,71,87,0.05);
+      color: var(--danger);
+    }
+
+    /* Typing */
+    .typing .msg-body {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 18px 20px;
+    }
+
+    .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+      animation: blink 1.4s ease-in-out infinite;
+    }
+    .dot:nth-child(2) { animation-delay: 0.22s; }
+    .dot:nth-child(3) { animation-delay: 0.44s; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 20px 0 28px;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s both;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    .input-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .input-prefix {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      pointer-events: none;
+      transition: color 0.2s;
+      letter-spacing: 0.05em;
+    }
+
+    textarea {
+      width: 100%;
+      background: var(--panel2);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 400;
+      padding: 14px 14px 14px 38px;
+      resize: none;
+      outline: none;
+      min-height: 50px;
+      max-height: 140px;
+      line-height: 1.5;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      letter-spacing: 0.01em;
+    }
+
+    textarea::placeholder { color: var(--text-dim); font-size: 0.95rem; }
+
+    textarea:focus {
+      border-color: rgba(0,245,200,0.35);
+      box-shadow: 0 0 0 1px rgba(0,245,200,0.1), var(--glow);
+    }
+
+    textarea:focus ~ .input-prefix { color: var(--accent); }
+
+    button {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      padding: 0 22px;
+      height: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.25s;
+      white-space: nowrap;
+      box-shadow: var(--glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,245,200,0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    button:hover:not(:disabled)::before { opacity: 1; }
+    button:hover:not(:disabled) {
+      box-shadow: 0 0 28px rgba(0,245,200,0.3);
+      border-color: rgba(0,245,200,0.8);
+    }
+
+    button:active:not(:disabled) { transform: scale(0.98); }
+
+    button:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .footer-meta {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+    }
+
+    #char-count { transition: color 0.2s; }
+    #char-count.warn { color: var(--danger); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeIn   { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeUp   { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    @keyframes pulse    { 0%,100% { opacity: 1; box-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent); } 50% { opacity: 0.4; box-shadow: 0 0 3px var(--accent); } }
+    @keyframes blink    { 0%,100% { opacity: 0.15; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1); } }
+    @keyframes spinSlow { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<div class="glow-blob tl"></div>
+<div class="glow-blob br"></div>
+
+<div class="layout">
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">
+          <div class="ring"></div>
+          <div class="ring2"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#00f5c8" stroke-width="1.5">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+            <path d="M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>ORACLE</h1>
+          <p>Synthetix AI &nbsp;·&nbsp; Document Intelligence</p>
+        </div>
+      </div>
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        SYSTEM ONLINE
+      </div>
+    </div>
+  </header>
+
+  <div class="messages" id="messages">
+    <div class="welcome">
+      <span class="hi">ORACLE v1.0 initialised.</span><br/>
+      Connected to Synthetix AI internal document corpus.<br/>
+      Query the knowledge base using natural language.<br/><br/>
+      <span class="warn">WARNING:</span> Unauthorised access attempts are logged.<br/>
+      Content filtering is active. Rate limit: 10 queries/hour.
+    </div>
+  </div>
+
+  <footer>
+    <div class="input-row">
+      <div class="input-wrap">
+        <textarea
+          id="query"
+          rows="1"
+          placeholder="Query the document corpus..."
+          maxlength="500"
+        ></textarea>
+        <span class="input-prefix">//</span>
+      </div>
+      <button id="send-btn" onclick="sendQuery()">TRANSMIT</button>
+    </div>
+    <div class="footer-meta">
+      <span>ENTER to send &nbsp;·&nbsp; SHIFT+ENTER for newline</span>
+      <span id="char-count">0 / 500</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  const messagesEl = document.getElementById('messages');
+  const queryEl    = document.getElementById('query');
+  const sendBtn    = document.getElementById('send-btn');
+  const charCount  = document.getElementById('char-count');
+
+  fetch('/health')
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById('doc-count').textContent = d.docs;
+    })
+    .catch(() => {});
+
+  queryEl.addEventListener('input', () => {
+    queryEl.style.height = 'auto';
+    queryEl.style.height = Math.min(queryEl.scrollHeight, 140) + 'px';
+    const len = queryEl.value.length;
+    charCount.textContent = `${len} / 500`;
+    charCount.classList.toggle('warn', len > 450);
+  });
+
+  queryEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendQuery();
+    }
+  });
+
+  function appendMsg(role, text) {
+    const div = document.createElement('div');
+    div.className = `msg ${role}`;
+    const labels = { user: 'YOU', oracle: 'ORACLE', error: 'ERROR' };
+    div.innerHTML = `
+      <div class="msg-label">${labels[role] || role}</div>
+      <div class="msg-body">${escHtml(text)}</div>
+    `;
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return div;
+  }
+
+  function appendTyping() {
+    const div = document.createElement('div');
+    div.className = 'msg oracle typing';
+    div.innerHTML = `
+      <div class="msg-label">ORACLE</div>
+      <div class="msg-body">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    `;
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return div;
+  }
+
+  function escHtml(s) {
+    return s
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/\n/g,'<br/>');
+  }
+
+  async function sendQuery() {
+    const query = queryEl.value.trim();
+    if (!query || sendBtn.disabled) return;
+
+    appendMsg('user', query);
+    queryEl.value = '';
+    queryEl.style.height = 'auto';
+    charCount.textContent = '0 / 500';
+    sendBtn.disabled = true;
+
+    const typing = appendTyping();
+
+    try {
+      const res  = await fetch('/chat', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ query }),
+      });
+      const data = await res.json();
+      typing.remove();
+
+      if (!res.ok) {
+        appendMsg('error', data.error || `HTTP ${res.status}`);
+      } else {
+        appendMsg('oracle', data.answer);
+      }
+    } catch (err) {
+      typing.remove();
+      appendMsg('error', 'Connection failed. Is the server running?');
+    }
+
+    sendBtn.disabled = false;
+    queryEl.focus();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+SYNTHETIX AI — API CHANGELOG
+Product: SynthCore API | Public
+
+v2.4.1 (Oct 2024): Fixed token counting bug for multilingual inputs. Streaming stability improvements.
+v2.4.0 (Sep 2024): Added function calling support. New /embeddings endpoint. Deprecated /classify (removal: Feb 2025).
+v2.3.2 (Jul 2024): Latency improvements for p99. Fixed race condition in batch endpoint.
+v2.3.0 (May 2024): Context window increased to 32k. Added JSON mode.
+v2.2.0 (Jan 2024): Initial public release of v2 API. Full backward compatibility with v1 maintained until Aug 2024.
