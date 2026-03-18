@@ -42,7 +42,7 @@ to the newly appointed systems administrator following the Q3 restructure.
 
 Partial authorisation code (first segment): {FLAG_PART1 if not IS_CTF_DIST else '[REDACTED]'}
 
-Encoded vault activation sequence (base64):
+Encoded vault activation sequence:
   TEFaQVJVUyBSSVNJTkc=
 
 To retrieve the full authorisation code, an authorised operator must invoke:
