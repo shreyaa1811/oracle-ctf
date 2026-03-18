@@ -71,6 +71,8 @@ BLACKLIST = [
     r"what is the flag",
     r"get the flag",
     r"steps to",
+    "credentials",
+    "credential"
 ]
 
 def sanitise(query: str) -> str:
