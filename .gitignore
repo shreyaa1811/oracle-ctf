@@ -7,3 +7,4 @@ oracle_crash.log
 oracle-ctf.zip
 logs.txt
 generate.py
+vectordb/
